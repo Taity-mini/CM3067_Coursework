@@ -14,6 +14,7 @@
 		E7A047B01DC64B6F000A5BBD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7A047AE1DC64B6F000A5BBD /* LaunchScreen.storyboard */; };
 		E7A047BB1DC64B6F000A5BBD /* CM3067_CourseworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A047BA1DC64B6F000A5BBD /* CM3067_CourseworkTests.swift */; };
 		E7A047C61DC64B6F000A5BBD /* CM3067_CourseworkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A047C51DC64B6F000A5BBD /* CM3067_CourseworkUITests.swift */; };
+		F5F427B71DF8681600A52DD9 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F427B61DF8681600A52DD9 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		E7A047C11DC64B6F000A5BBD /* CM3067_CourseworkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CM3067_CourseworkUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7A047C51DC64B6F000A5BBD /* CM3067_CourseworkUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CM3067_CourseworkUITests.swift; sourceTree = "<group>"; };
 		E7A047C71DC64B6F000A5BBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F5F427B61DF8681600A52DD9 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				E7A047AC1DC64B6F000A5BBD /* Assets.xcassets */,
 				E7A047AE1DC64B6F000A5BBD /* LaunchScreen.storyboard */,
 				E7A047B11DC64B6F000A5BBD /* Info.plist */,
+				F5F427B61DF8681600A52DD9 /* DetailViewController.swift */,
 			);
 			path = CM3067_Coursework;
 			sourceTree = "<group>";
@@ -256,6 +259,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5F427B71DF8681600A52DD9 /* DetailViewController.swift in Sources */,
 				E7A047A81DC64B6F000A5BBD /* ViewController.swift in Sources */,
 				E7A047A61DC64B6F000A5BBD /* AppDelegate.swift in Sources */,
 			);
@@ -484,6 +488,7 @@
 				E7A047CC1DC64B6F000A5BBD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E7A047CD1DC64B6F000A5BBD /* Build configuration list for PBXNativeTarget "CM3067_CourseworkTests" */ = {
 			isa = XCConfigurationList;
@@ -492,6 +497,7 @@
 				E7A047CF1DC64B6F000A5BBD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E7A047D01DC64B6F000A5BBD /* Build configuration list for PBXNativeTarget "CM3067_CourseworkUITests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +506,7 @@
 				E7A047D21DC64B6F000A5BBD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
