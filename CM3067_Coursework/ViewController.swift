@@ -35,11 +35,15 @@ class ViewController: UIViewController {
             
             if (name.text!.isEmpty) {
                 
-                let alert = UIAlertView()
-                alert.title = "No Text"
-                alert.message = "Please Enter Text In The Box"
-                alert.addButtonWithTitle("Ok")
-                alert.show()
+//                let alert = UIAlertView()
+//                alert.title = "No Text"
+//                alert.message = "Please Enter Text In The Box"
+//                alert.addButtonWithTitle("Ok")
+//                alert.show()
+                
+                let alert = UIAlertController(title: "No Text", message:"Please Enter Text In The Box", preferredStyle: .Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .Default) { _ in })
+                self.presentViewController(alert, animated: true){}
                 
                 return false
             }

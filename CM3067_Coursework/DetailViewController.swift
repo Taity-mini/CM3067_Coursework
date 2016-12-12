@@ -33,7 +33,7 @@ class DetailViewController: UIViewController {
         mainDefence.text = ChosenPokemon.mainDefence.description
         hitPoints.text = ChosenPokemon.hitPoints.description
         
-        let theURL = "https://img.pokemondb.net/artwork/" + ChosenPokemon.name
+        let theURL = "https://dex.pokemonshowdown.com/pokemon/" + ChosenPokemon.name
         
         
         let flagWebURL: NSURL = NSURL(string: theURL)!
