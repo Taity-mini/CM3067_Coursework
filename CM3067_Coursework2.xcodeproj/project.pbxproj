@@ -16,6 +16,8 @@
 		E7A047C61DC64B6F000A5BBD /* CM3067_CourseworkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A047C51DC64B6F000A5BBD /* CM3067_CourseworkUITests.swift */; };
 		E7E841BF1DFB575D00325210 /* pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E841BE1DFB575D00325210 /* pokemon.swift */; };
 		E7EA613B1DFC730300BB71DE /* PokemonTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EA613A1DFC730300BB71DE /* PokemonTableViewController.swift */; };
+		F53983EC1E0052C6008D92EA /* FileHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53983EB1E0052C6008D92EA /* FileHandler.swift */; };
+		F5E146C21DFECE7D00917E04 /* PokemonData.plist in Resources */ = {isa = PBXBuildFile; fileRef = F5E146C11DFECE7D00917E04 /* PokemonData.plist */; };
 		F5F427B71DF8681600A52DD9 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F427B61DF8681600A52DD9 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +54,8 @@
 		E7A047C71DC64B6F000A5BBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E7E841BE1DFB575D00325210 /* pokemon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = pokemon.swift; sourceTree = "<group>"; };
 		E7EA613A1DFC730300BB71DE /* PokemonTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PokemonTableViewController.swift; path = ../PokemonTableViewController.swift; sourceTree = "<group>"; };
+		F53983EB1E0052C6008D92EA /* FileHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileHandler.swift; sourceTree = "<group>"; };
+		F5E146C11DFECE7D00917E04 /* PokemonData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PokemonData.plist; sourceTree = "<group>"; };
 		F5F427B61DF8681600A52DD9 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,6 +116,8 @@
 				E7A047B11DC64B6F000A5BBD /* Info.plist */,
 				F5F427B61DF8681600A52DD9 /* DetailViewController.swift */,
 				E7E841BE1DFB575D00325210 /* pokemon.swift */,
+				F5E146C11DFECE7D00917E04 /* PokemonData.plist */,
+				F53983EB1E0052C6008D92EA /* FileHandler.swift */,
 			);
 			path = CM3067_Coursework;
 			sourceTree = "<group>";
@@ -213,7 +219,7 @@
 					};
 				};
 			};
-			buildConfigurationList = E7A0479D1DC64B6F000A5BBD /* Build configuration list for PBXProject "CM3067_Coursework" */;
+			buildConfigurationList = E7A0479D1DC64B6F000A5BBD /* Build configuration list for PBXProject "CM3067_Coursework2" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -240,6 +246,7 @@
 			files = (
 				E7A047B01DC64B6F000A5BBD /* LaunchScreen.storyboard in Resources */,
 				E7A047AD1DC64B6F000A5BBD /* Assets.xcassets in Resources */,
+				F5E146C21DFECE7D00917E04 /* PokemonData.plist in Resources */,
 				E7A047AB1DC64B6F000A5BBD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,6 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F53983EC1E0052C6008D92EA /* FileHandler.swift in Sources */,
 				F5F427B71DF8681600A52DD9 /* DetailViewController.swift in Sources */,
 				E7E841BF1DFB575D00325210 /* pokemon.swift in Sources */,
 				E7EA613B1DFC730300BB71DE /* PokemonTableViewController.swift in Sources */,
@@ -480,7 +488,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E7A0479D1DC64B6F000A5BBD /* Build configuration list for PBXProject "CM3067_Coursework" */ = {
+		E7A0479D1DC64B6F000A5BBD /* Build configuration list for PBXProject "CM3067_Coursework2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E7A047C81DC64B6F000A5BBD /* Debug */,

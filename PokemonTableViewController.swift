@@ -6,40 +6,72 @@
 //  Copyright © 2016 Andrew Tait. All rights reserved.
 //
 
+import Foundation
+import CoreData
 import UIKit
 
+
 class PokemonTableViewController: UITableViewController {
-    
-    var pokemonArray: [pokemon] = [
-        pokemon(name:"pikachu", description: "When several of these POKéMON gather, their electricity could build and cause lightning storms.", type: "Electric",  species: "Mouse Pokémon", hitPoints: 20, mainAttack: 4.0, mainDefence: 3.0)
-        
-    ]
-    
-    var Pokemon: pokemon = pokemon(name:"", description: "", type:"", species: "", hitPoints: 0.0, mainAttack: 0.0, mainDefence: 0.0)
+    let userDefaults = NSUserDefaults.standardUserDefaults()
     
     
-    @IBAction func cancel(segue: UIStoryboardSegue){
-        
-    }
     
-    @IBAction func done(segue: UIStoryboardSegue){
-        
-        let editor = segue.sourceViewController as! ViewController
-        let newPokemon = editor.Pokemon
-        pokemonArray.append(newPokemon)
-       self.tableView.reloadData()
-    }
+    var pokemonArray: [pokemon] = []
+    
+    
+    var Pokemon: pokemon = pokemon(name:"", type:"", species: "", hitPoints: 0, mainAttack: 0, mainDefence: 0, spAtk:0, spDef: 0, speed: 0, releaseDate: "")
     
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        super.viewDidLoad()
+        //initalPokemon()
+        //insertItems()
+        retrieveItems()
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
+        
     }
+    
+    func insertItems()
+    {
+        //userDefaults.removeObjectForKey("pokemon")
+        //userDefaults.synchronize()
+        let data = NSKeyedArchiver.archivedDataWithRootObject(pokemonArray)
+        userDefaults.setObject(data, forKey: "pokemon")
+        ///userDefaults.setObject(data, forKey: "pokemon")
+        userDefaults.synchronize()
+    }
+    
+    func retrieveItems()
+    {
+        //Check if keyvalue exists
+        if (Pokemon.pokemonSaveExists("pokemon")){
+            
+            //userDefaults.synchronize()
+            if let data = userDefaults.objectForKey("pokemon") as? NSData {
+                dump(data)
+                pokemonArray = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! [pokemon]
+                dump(pokemonArray)
+                print("Read Successfull")
+            }
+            else{
+                print ("Read failed")
+            }
+            
+        } else{ //Otherwise load inital pokemon data
+            initalPokemon()
+        }
+    }
+    
+    func initalPokemon()
+    {
+        let pokemon1: pokemon = pokemon(name:"pikachu", type: "Electric",  species: "Mouse Pokémon", hitPoints: 20, mainAttack: 40, mainDefence: 30, spAtk: 40, spDef: 50, speed: 90, releaseDate: "14-12-2017")
+        pokemonArray.append(pokemon1)
+    }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -50,7 +82,7 @@ class PokemonTableViewController: UITableViewController {
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 2
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -60,42 +92,143 @@ class PokemonTableViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("pokemon", forIndexPath: indexPath)
         
-        cell.textLabel!.text = pokemonArray[indexPath.row].name as String!
+        
+        
+        cell.textLabel!.text = pokemonArray[indexPath.row].name as String!?
         
         cell.detailTextLabel!.text = pokemonArray[indexPath.row].type as String!
         
-        let theURL = "https://img.pokemondb.net/artwork/" + pokemonArray[indexPath.row].name + ".jpg"
+        let theURL = "https://img.pokemondb.net/artwork/" + pokemonArray[indexPath.row].name.lowercaseString + ".jpg"
         
         cell.imageView!.image = NSURL(string:theURL)
             .flatMap { NSData(contentsOfURL: $0) }
             .flatMap { UIImage(data: $0) }
-        //cell.Subtitle!.text = pokemonArray[indexPath.row].description
         
         return cell
     }
     
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
+    {
+        var header = ""
+        switch(section){
+        case 0:
+            header = "Captured"
+            break
+        case 1:
+            header = "Released"
+            break
+        default:
+            return "unknown"
+        }
+        
+        return header
+    }
     
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
     
-    /*
-     // Override to support editing the table view.
-     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-     if editingStyle == .Delete {
-     // Delete the row from the data source
-     tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-     } else if editingStyle == .Insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        //    NORMAL	FIRE	WATER	ELECTRIC	GRASS	ICE FIGHTING	POISON	GROUND	FLYING	PSYCHIC	BUG ROCK	GHOST	DRAGON	DARK	STEEL	FAIRY
+        //Change cell background based on pokemon type:
+        switch(pokemonArray[indexPath.row].type)
+        {
+        case "Electric":
+            cell.backgroundColor = UIColor.yellowColor()
+            break
+        case "Water":
+            cell.backgroundColor = UIColor.blueColor()
+            break
+            
+        case "Fire":
+            cell.backgroundColor = UIColor.redColor()
+            break
+            
+        case "Grass":
+            cell.backgroundColor = UIColor.redColor()
+            break
+            
+        case "Ice":
+            cell.backgroundColor = UIColor.redColor()
+            break
+            
+        case "Fighting":
+            cell.backgroundColor = UIColor.redColor()
+            break
+            
+        case "Posion":
+            cell.backgroundColor = UIColor.redColor()
+            break
+            
+        case "Flying":
+            cell.backgroundColor = UIColor.redColor()
+            break
+            
+            
+        case "Psychic":
+            cell.backgroundColor = UIColor.redColor()
+            break
+            
+        case "Bug":
+            cell.backgroundColor = UIColor.redColor()
+            break
+            
+        case "Rock":
+            cell.backgroundColor = UIColor.redColor()
+            break
+            
+            
+        case "Ghost":
+            cell.backgroundColor = UIColor.brownColor()
+            break
+            
+        case "Dragon":
+            cell.backgroundColor = UIColor.brownColor()
+            break
+            
+        case "Steel":
+            cell.backgroundColor = UIColor.brownColor()
+            break
+            
+        case "Fairy":
+            cell.backgroundColor = UIColor.purpleColor()
+            break
+            
+        default:
+            cell.backgroundColor = UIColor.clearColor()
+        }
+        
+    }
+    
+    
+    
+    // Override to support conditional editing of the table view.
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        // Return false if you do not want the specified item to be editable.
+        return true
+    }
+    
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            // Delete the row from the data source
+            pokemonArray.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            //} else if editingStyle == .Insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
+    }
+    
+    
+    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
+        let itemToMove = pokemonArray[fromIndexPath.row]
+        pokemonArray.removeAtIndex(fromIndexPath.row)
+        pokemonArray.insert(itemToMove, atIndex: toIndexPath.row)
+        insertItems()
+    }
+    
+    
     
     /*
      // Override to support rearranging the table view.
@@ -118,6 +251,27 @@ class PokemonTableViewController: UITableViewController {
         
     }
     
+    @IBAction func cancel(segue: UIStoryboardSegue){
+        
+    }
+    
+    @IBAction func done(segue: UIStoryboardSegue){
+        
+        let editor = segue.sourceViewController as! ViewController
+        let newPokemon = editor.Pokemon
+        pokemonArray.append(newPokemon)
+        insertItems()
+        self.tableView.reloadData()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        //initalPokemon()
+        //fh.setArray(pokemonArray)
+        //fh.loadFile()
+        //pokemonArray = (fh.getArray() as? [pokemon])!
+        //retrieveItems()
+        
+    }
     
     
     // MARK: - Navigation
@@ -130,5 +284,5 @@ class PokemonTableViewController: UITableViewController {
         }
     }
     
-
+    
 }

@@ -105,8 +105,8 @@
 			children = (
 				E7AFD8E51DFCBA260007C96A /* PokemonTableViewController.swift */,
 				E7A047A51DC64B6F000A5BBD /* AppDelegate.swift */,
-				E7A047A71DC64B6F000A5BBD /* ViewController.swift */,
 				E7A047A91DC64B6F000A5BBD /* Main.storyboard */,
+				E7A047A71DC64B6F000A5BBD /* ViewController.swift */,
 				E7A208F51DFCB83C004FC0C8 /* pokemon.swift */,
 				E7A047AC1DC64B6F000A5BBD /* Assets.xcassets */,
 				E7A047AE1DC64B6F000A5BBD /* LaunchScreen.storyboard */,
