@@ -43,11 +43,20 @@ class DetailViewController: UIViewController {
         dateFormatter.dateFormat = "dd-MM-YYYY"
         let chosenDate = dateFormatter.dateFromString(ChosenPokemon.releaseDate)
         
-        let todaysDate: NSDate = NSDate()
-
         
-        let difference = daysBetweenDates(todaysDate, endDate: chosenDate!)
-        dateDifference.text = difference.description
+        let todaysDateFormat = dateFormatter.stringFromDate(NSDate())
+        let todaysDate = dateFormatter.dateFromString(todaysDateFormat)
+        
+        let difference = daysBetweenDates(todaysDate!, endDate: chosenDate!)
+        if (difference < 0){
+            dateDifference.text = "Released"
+        }
+        else if (difference == 0){
+            dateDifference.text = "Today"
+        } else{
+             dateDifference.text = difference.description + "Days"
+        }
+       
         let totalStats = ChosenPokemon.mainAttack + ChosenPokemon.mainDefence + ChosenPokemon.hitPoints + ChosenPokemon.hitPoints + ChosenPokemon.spAtk; +ChosenPokemon.spDef + ChosenPokemon.speed
         
         total.text = totalStats.description
@@ -55,8 +64,22 @@ class DetailViewController: UIViewController {
         let theURL = "https://dex.pokemonshowdown.com/pokemon/" + ChosenPokemon.name.lowercaseString
         
         
-        let pokedexURL: NSURL = NSURL(string: theURL)!
-        pokemonEntry.loadRequest(NSURLRequest(URL: pokedexURL))
+        //let pokedexURL: NSURL = NSURL(string: theURL)!
+        
+       
+        
+        
+        
+        
+        
+       if let validURL: NSURL = NSURL(string: theURL) {
+             pokemonEntry.loadRequest(NSURLRequest(URL: validURL))
+        } else {
+            let alert = UIAlertController(title: "Error", message:"Website failed to load", preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .Default) { _ in })
+            self.presentViewController(alert, animated: true){}
+        }
+        
         
     }
     

@@ -10,6 +10,7 @@
 import Foundation
 
 class pokemon: NSObject, NSCoding{
+    //Class variables/fields
     let name: String
     let type: String
     let species: String
@@ -23,7 +24,7 @@ class pokemon: NSObject, NSCoding{
     
 
     
-    
+    //Constructor
     init(name: String, type: String, species: String, hitPoints: Int,mainAttack: Int, mainDefence: Int, spAtk: Int, spDef: Int, speed: Int, releaseDate: String){
         self.name = name
         self.type = type
