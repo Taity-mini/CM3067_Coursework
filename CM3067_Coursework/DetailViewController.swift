@@ -38,7 +38,7 @@ class DetailViewController: UIViewController {
         pokemonSPDef.text = ChosenPokemon.spDef.description
         pokemonSpeed.text = ChosenPokemon.speed.description
         
-    
+        //Get date from string
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "dd-MM-YYYY"
         let chosenDate = dateFormatter.dateFromString(ChosenPokemon.releaseDate)
@@ -47,6 +47,7 @@ class DetailViewController: UIViewController {
         let todaysDateFormat = dateFormatter.stringFromDate(NSDate())
         let todaysDate = dateFormatter.dateFromString(todaysDateFormat)
         
+        //Display date count down from todays date
         let difference = daysBetweenDates(todaysDate!, endDate: chosenDate!)
         if (difference < 0){
             dateDifference.text = "Released"
@@ -62,16 +63,10 @@ class DetailViewController: UIViewController {
         total.text = totalStats.description
         
         let theURL = "https://dex.pokemonshowdown.com/pokemon/" + ChosenPokemon.name.lowercaseString
+    
         
         
-        //let pokedexURL: NSURL = NSURL(string: theURL)!
-        
-       
-        
-        
-        
-        
-        
+        //Check if website if valid and loads correctly
        if let validURL: NSURL = NSURL(string: theURL) {
              pokemonEntry.loadRequest(NSURLRequest(URL: validURL))
         } else {
@@ -83,6 +78,7 @@ class DetailViewController: UIViewController {
         
     }
     
+    //Check how many days between dates
     func daysBetweenDates(startDate: NSDate, endDate: NSDate) -> Int
     {
         let calendar = NSCalendar.currentCalendar()

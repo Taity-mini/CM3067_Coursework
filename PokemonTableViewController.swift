@@ -9,20 +9,20 @@
 import Foundation
 import CoreData
 import UIKit
-import Darwin
 
 class PokemonTableViewController: UITableViewController {
     let userDefaults = NSUserDefaults.standardUserDefaults()
     
-    
-    
+
     var pokemonArray: [pokemon] = []
     
+    //Table view arrays
     var released: [pokemon] = []
     var captured: [pokemon] = []
     
+    //Empty pokemon object to pass between views
     var Pokemon: pokemon = pokemon(name:"", type:"", species: "", hitPoints: 0, mainAttack: 0, mainDefence: 0, spAtk:0, spDef: 0, speed: 0, releaseDate: "")
-    var releaseCount: Int = 0
+
     
     var counter: Int = 0
     func findReleasedPokemon()
@@ -30,8 +30,7 @@ class PokemonTableViewController: UITableViewController {
         released = []
         captured = []
         
-        releaseCount = 0
-                counter = 0
+        counter = 0
         
         for pokemon in pokemonArray{
             
@@ -49,6 +48,7 @@ class PokemonTableViewController: UITableViewController {
             // Compare them
             switch releaseDate!.compare(dateA) {
             case .OrderedAscending     :
+                //Put into released array
                 released.append(pokemon)
             //print("Date A is earlier than date B")
             case .OrderedDescending    :
@@ -61,36 +61,32 @@ class PokemonTableViewController: UITableViewController {
             counter+=1
         }
         
-        
-        dump(captured)
-        dump(released)
-        
     }
     
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        //initalPokemon()
-        //insertItems()
+        initalPokemon()
+        insertItems()
         retrieveItems()
         findReleasedPokemon()
         
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
         
     }
     
+    //Insert pokemon objects into user defaults
     func insertItems()
     {
-        //userDefaults.removeObjectForKey("pokemon")
-        //userDefaults.synchronize()
+        userDefaults.removeObjectForKey("pokemon")
         let data = NSKeyedArchiver.archivedDataWithRootObject(pokemonArray)
         userDefaults.setObject(data, forKey: "pokemon")
-        ///userDefaults.setObject(data, forKey: "pokemon")
         userDefaults.synchronize()
     }
     
+    
+    //Get pokemon objects from user defaults
     func retrieveItems()
     {
         //Check if keyvalue exists
@@ -114,8 +110,36 @@ class PokemonTableViewController: UITableViewController {
     
     func initalPokemon()
     {
-        let pokemon1: pokemon = pokemon(name:"pikachu", type: "Electric",  species: "Mouse Pokémon", hitPoints: 20, mainAttack: 40, mainDefence: 30, spAtk: 40, spDef: 50, speed: 90, releaseDate: "14-12-2017")
-        pokemonArray.append(pokemon1)
+        //Inital pokemon if userdefaults is empty
+        
+        //Captured Pokemon
+        //Inspired by twitch plays pokemon red
+        //en.wikipedia.org/wiki/Twitch_Plays_Pokémon
+        let pokemon1: pokemon = pokemon(name:"Pikachu", type: "Electric",  species: "Mouse Pokémon", hitPoints: 35, mainAttack: 55, mainDefence: 40, spAtk: 50, spDef: 50, speed: 90, releaseDate: "21-12-2017")
+        let pokemon2: pokemon = pokemon(name:"Pidgeot", type: "Flying",  species: "Bird Jesus", hitPoints: 83, mainAttack: 80, mainDefence: 75, spAtk: 70, spDef: 70, speed: 101, releaseDate: "21-12-2017")
+        let pokemon3: pokemon = pokemon(name:"Omanyte", type: "Water",  species: "Lord Helix", hitPoints: 35, mainAttack: 40, mainDefence: 100, spAtk: 90, spDef: 55, speed: 35, releaseDate: "14-12-2017")
+        let pokemon4: pokemon = pokemon(name:"Zapdos", type: "Electric",  species: "Battery Jesus", hitPoints: 20, mainAttack: 40, mainDefence: 30, spAtk: 40, spDef: 50, speed: 90, releaseDate: "14-12-2017")
+        let pokemon5: pokemon = pokemon(name:"Nidoking", type: "Posion",  species: "The Fonz", hitPoints: 81, mainAttack: 102, mainDefence: 77, spAtk: 85, spDef: 75, speed: 85, releaseDate: "14-12-2017")
+        let pokemon6: pokemon = pokemon(name:"Lapras", type: "Ice",  species: "Air Jordon", hitPoints: 20, mainAttack: 40, mainDefence: 30, spAtk: 40, spDef: 50, speed: 90, releaseDate: "14-12-2017")
+        let pokemon7: pokemon = pokemon(name:"Venomoth", type: "Bug",  species: "All Terrain Venomoth", hitPoints: 20, mainAttack: 40, mainDefence: 30, spAtk: 40, spDef: 50, speed: 90, releaseDate: "14-12-2017")
+        
+        //Released Pokemon
+         let pokemon8: pokemon = pokemon(name:"Rattata", type: "Normal",  species: "Mouse Pokémon", hitPoints: 20, mainAttack: 40, mainDefence: 30, spAtk: 40, spDef: 50, speed: 90, releaseDate: "14-12-2015")
+         let pokemon9: pokemon = pokemon(name:"Magikarp", type: "Water",  species: "Fish Pokémon", hitPoints: 20, mainAttack: 40, mainDefence: 30, spAtk: 40, spDef: 50, speed: 90, releaseDate: "14-12-2014")
+         let pokemon10: pokemon = pokemon(name:"Weedle", type: "Bug",  species: "Hairy Bug Pokémon", hitPoints: 20, mainAttack: 40, mainDefence: 30, spAtk: 40, spDef: 50, speed: 90, releaseDate: "14-12-2013")
+
+        
+        //Add pokemon to array
+         pokemonArray.append(pokemon3)
+         pokemonArray.append(pokemon2)
+         pokemonArray.append(pokemon4)
+         pokemonArray.append(pokemon5)
+         pokemonArray.append(pokemon6)
+         pokemonArray.append(pokemon7)
+         pokemonArray.append(pokemon1)
+         pokemonArray.append(pokemon8)
+         pokemonArray.append(pokemon9)
+         pokemonArray.append(pokemon10)
     }
     
     
@@ -185,6 +209,7 @@ class PokemonTableViewController: UITableViewController {
         return cell
     }
     
+    //Header sections
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
     {
         var header = ""
@@ -202,7 +227,7 @@ class PokemonTableViewController: UITableViewController {
         return header
     }
     
-    //
+    //Change background colour based on pokemon type
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         //    NORMAL	FIRE	WATER	ELECTRIC	GRASS	ICE FIGHTING	POISON	GROUND	FLYING	PSYCHIC	BUG ROCK	GHOST	DRAGON	DARK	STEEL	FAIRY
         //Change cell background based on pokemon type:
@@ -315,7 +340,6 @@ class PokemonTableViewController: UITableViewController {
                 tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
                 insertItems()
                 
-                
             }
             
             if(indexPath.section == 1)
@@ -333,17 +357,14 @@ class PokemonTableViewController: UITableViewController {
                 insertItems()
             }
             
-            
-            
-            //} else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        
         }
     }
     
+    //Find find of orginal pokemon array using selected pokemon object
     func findIndex(Pokemon: pokemon)-> Int{
         
         let find: pokemon = Pokemon
-        
         
         var index: Int = 0
         var counter: Int = 0
@@ -365,10 +386,6 @@ class PokemonTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
         
-//        let itemToMove = pokemonArray[fromIndexPath.row]
-//        pokemonArray.removeAtIndex(fromIndexPath.row)
-//        pokemonArray.insert(itemToMove, atIndex: toIndexPath.row)
-        
         
         var fromindex: Int = 0;
         var toindex: Int = 0
@@ -378,7 +395,6 @@ class PokemonTableViewController: UITableViewController {
             alert.addAction(UIAlertAction(title: "OK", style: .Default) { _ in })
             self.presentViewController(alert, animated: true){}
             tableView.reloadData()
-            
             
         } else{
             if(fromIndexPath.section==0){
@@ -438,6 +454,8 @@ class PokemonTableViewController: UITableViewController {
         
     }
     
+    
+    
     @IBAction func done(segue: UIStoryboardSegue){
         
         let editor = segue.sourceViewController as! ViewController
@@ -448,14 +466,7 @@ class PokemonTableViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
-    override func viewWillAppear(animated: Bool) {
-        //initalPokemon()
-        //fh.setArray(pokemonArray)
-        //fh.loadFile()
-        //pokemonArray = (fh.getArray() as? [pokemon])!
-        //retrieveItems()
-        
-    }
+
     
     
     // MARK: - Navigation

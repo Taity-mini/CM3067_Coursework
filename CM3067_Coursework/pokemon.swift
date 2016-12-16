@@ -41,7 +41,6 @@ class pokemon: NSObject, NSCoding{
     //override init(){}
     
     //NSCoder stuff for saving/reading to plist file
-    
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(pokemonArray, forKey: "pokemonArray")
         aCoder.encodeObject(name, forKey:"name")
@@ -126,7 +125,7 @@ class pokemon: NSObject, NSCoding{
     }
     
     
-    
+    //Decoder for userdefaults
     required init?  (coder aDecoder: NSCoder) {
         self.name = aDecoder.decodeObjectForKey("name") as! String!
         self.type = aDecoder.decodeObjectForKey("type") as! String!

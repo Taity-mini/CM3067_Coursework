@@ -10,10 +10,9 @@ import UIKit
 
 class ViewController:  UIViewController, UIPickerViewDelegate, UIPickerViewDataSource{
     
-    @IBOutlet weak var pickerView: UIPickerView!
     //Field variables
+    @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var name: UITextField!
-    
     @IBOutlet weak var pokemonSpecies: UITextField!
     @IBOutlet weak var pokemonHitPoints: UITextField!
     @IBOutlet weak var pokemonMainAttack: UITextField!
@@ -26,14 +25,15 @@ class ViewController:  UIViewController, UIPickerViewDelegate, UIPickerViewDataS
     
     var pickerData: [String] = [String]()
     
+    var Pokemon: pokemon = pokemon(name:"", type:"", species: "", hitPoints: 0, mainAttack: 0, mainDefence: 0, spAtk:0, spDef: 0, speed: 0, releaseDate: "")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Input validation handlers
         pokemonReleaseDate.datePickerMode = UIDatePickerMode.Date
-        
         self.pickerView.delegate = self
         self.pickerView.dataSource = self
-        
         self.name.addTarget(self, action: #selector(ViewController.inputValdiation(_:)), forControlEvents: UIControlEvents.EditingChanged)
         self.pokemonSpecies.addTarget(self, action: #selector(ViewController.inputValdiation(_:)), forControlEvents: UIControlEvents.EditingChanged)
         self.pokemonMainAttack.addTarget(self, action: #selector(ViewController.inputValdiationInt(_:)), forControlEvents: UIControlEvents.EditingChanged)
@@ -49,12 +49,7 @@ class ViewController:  UIViewController, UIPickerViewDelegate, UIPickerViewDataS
         
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
-        
-        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
-        //tap.cancelsTouchesInView = false
-        
-        view.addGestureRecognizer(tap)
-        
+            view.addGestureRecognizer(tap)
     }
     
     func dismissKeyboard() {
@@ -91,7 +86,7 @@ class ViewController:  UIViewController, UIPickerViewDelegate, UIPickerViewDataS
     
     
     
-    var Pokemon: pokemon = pokemon(name:"", type:"", species: "", hitPoints: 0, mainAttack: 0, mainDefence: 0, spAtk:0, spDef: 0, speed: 0, releaseDate: "")
+  
     
     @IBAction func hideKeyboard(sender: AnyObject){
         resignFirstResponder()
@@ -122,10 +117,8 @@ class ViewController:  UIViewController, UIPickerViewDelegate, UIPickerViewDataS
         return true
     }
     
-    
+    //Create new pokemon object based on text fields
     func newPokemon() -> pokemon {
-        
-        
         
         let selectedValue = pickerData[pickerView.selectedRowInComponent(0)]
         
@@ -149,6 +142,8 @@ class ViewController:  UIViewController, UIPickerViewDelegate, UIPickerViewDataS
         // Dispose of any resources that can be recreated.
     }
     
+    
+    //Date picker properties
     
     // The number of columns of data
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
